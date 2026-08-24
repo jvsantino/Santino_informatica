@@ -24,9 +24,10 @@ O formulário coleta seis informações: nome, endereço, telefone, dispositivo,
 - Labels associados aos campos pelo atributo `for`, para acessibilidade
 - Validação dos campos obrigatórios via JavaScript
 - Bloqueio do recarregamento da página no envio, usando `preventDefault()`
+  
+## Estrutura
+
 ## Autor
 
 João Victor Santino
 - Layout responsivo construído em mobile first, com media query para telas maiores
-
-## Estrutura
