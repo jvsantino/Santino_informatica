@@ -1,45 +1,248 @@
+/* ===== Base ===== */
+:root {
+  --azul: #14456b;
+  --azul-claro: #1d6fa5;
+  --fundo: #f4f6f8;
+  --branco: #ffffff;
+  --texto: #1c1f23;
+  --cinza: #5a6470;
+  --borda: #ccd4dc;
+  --erro: #b32020;
+  --ok: #1d7a3e;
+  --raio: 8px;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--fundo);
+  color: var(--texto);
+  line-height: 1.6;
 }
+
+/* ===== Cabeçalho e rodapé ===== */
+header {
+  background-color: var(--azul);
+  color: var(--branco);
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+footer {
+  background-color: var(--azul);
+  color: var(--branco);
+  text-align: center;
+  padding: 1.25rem 1rem;
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+}
+
+/* ===== Layout ===== */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+section,
+form {
+  background-color: var(--branco);
+  border-radius: var(--raio);
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: var(--azul);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--borda);
+}
+
+/* ===== Formulário ===== */
+fieldset {
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--cinza);
+  margin-bottom: 0.75rem;
+}
+
 label {
-    display: block;
+  display: block;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
 }
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 16px;
+
+label span {
+  font-weight: 400;
+  color: var(--cinza);
+  font-size: 0.85rem;
 }
-input[type="submit"] {
-    background-color: #2563eb;
-    color: #fff;
-    border: none;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+
+input,
+textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background-color: var(--branco);
+  color: var(--texto);
 }
-input[type="submit"] {
-    background-color: #2563eb;
-    color: #fff;
-    border: none;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 3px solid var(--azul-claro);
+  outline-offset: 2px;
 }
-@media (min-width: 768px) {
-    form {
-        max-width: 500px;
-        margin: 0 auto;
-    }
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+small {
+  display: block;
+  color: var(--cinza);
+  font-size: 0.85rem;
+  margin: -0.5rem 0 0.75rem;
+}
+
+/* ===== Mensagem do CEP ===== */
+#cep-status {
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-height: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+#cep-status.buscando { color: var(--cinza); }
+#cep-status.sucesso  { color: var(--ok); }
+#cep-status.falha    { color: var(--erro); }
+
+/* ===== Botões ===== */
+button {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9rem;
+  border: none;
+  border-radius: var(--raio);
+  background-color: var(--azul);
+  color: var(--branco);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--azul-claro);
+}
+
+/* ===== Comprovante e QR ===== */
+#comprovante {
+  text-align: center;
+}
+
+#comprovante h2 {
+  text-align: left;
+}
+
+#qrcode {
+  display: block;
+  margin: 1rem auto 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.5rem;
+  background-color: var(--branco);
+}
+
+/* ===== Lista de OS ===== */
+#lista-os {
+  list-style: none;
+}
+
+#lista-os li {
+  border-left: 4px solid var(--azul-claro);
+  background-color: var(--fundo);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+#lista-os strong {
+  color: var(--azul);
+}
+
+#lista-os em {
+  color: var(--cinza);
+}
+
+/* ===== Via do cliente ===== */
+#via dl {
+  margin-bottom: 1.5rem;
+}
+
+#via dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--cinza);
+  margin-top: 1rem;
+}
+
+#via dd {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+#aviso {
+  background-color: var(--fundo);
+  border-left: 4px solid var(--azul-claro);
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Telas maiores ===== */
+@media (min-width: 720px) {
+  header h1 { font-size: 2rem; }
+  main { padding: 2.5rem 1rem; }
+  section, form { padding: 2rem; }
+}
+
+/* ===== Impressão da via ===== */
+@media print {
+  body { background: var(--branco); }
+  header { background: var(--branco); color: var(--texto); border-bottom: 2px solid var(--texto); }
+  section, form { box-shadow: none; }
+  #acoes { display: none; }
 }

@@ -3,29 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OS SANTINO INFORMÁTICA</title>
+    <meta name="description" content="Cadastro de ordens de serviço da Santino Informática, assistência técnica em Recife.">
+    <title>OS | Santino Informática</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
     <link rel="stylesheet" href="style.css">
-   </head>
+</head>
 <body>
-    <form action="" id="formulario">
-    <h2>Santino Informática - Ordens de serviço</h2>
-    <label for="nome">Nome</label>
-    <input type="text" id="nome">
-    <label for="endereco">Endereço</label>
-    <input type="text" id="endereco">
-    <label for="telefone">Telefone</label>
-    <input type="tel" id="telefone">
-    <label for="dispositivo">Dispositivo</label>
-    <input type="text" id="dispositivo">
-    <label for="data_de_entrada">Data de entrada</label>
-    <input type="date" id="data_de_entrada">
-    <label for="defeito">Defeito</label>
-    <textarea id="defeito" rows="4"></textarea>
-    <input type="submit" value="Prosseguir">
-    </form>
-    
+    <header>
+        <h1>Santino Informática</h1>''
+        <p>Cadastro de Ordens de Serviço</p>
+    </header>
 
-    
+    <main>
+        <form id="formulario">
+            <h2>Nova ordem de serviço</h2>
+
+            <fieldset>
+                <legend>Dados do cliente</legend>
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(81) 90000-0000" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Endereço</legend>
+
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" maxlength="8" inputmode="numeric"
+                       placeholder="50030230" required>
+                <small>Digite apenas os números, sem traço.</small>
+                <p id="cep-status" role="status" aria-live="polite"></p>
+
+                <label for="logradouro">Logradouro</label>
+                <input type="text" id="logradouro" name="logradouro" required>
+
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required>
+
+                <label for="complemento">Complemento <span>(opcional)</span></label>
+                <input type="text" id="complemento" name="complemento">
+
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Equipamento</legend>
+
+                <label for="dispositivo">Dispositivo</label>
+                <input type="text" id="dispositivo" name="dispositivo"
+                       placeholder="Ex: Notebook Dell Inspiron" required>
+
+                <label for="data_de_entrada">Data de entrada</label>
+                <input type="date" id="data_de_entrada" name="data_de_entrada" required>
+
+                <label for="defeito">Defeito relatado</label>
+                <textarea id="defeito" name="defeito" rows="4" required></textarea>
+            </fieldset>
+
+            <button type="submit">Cadastrar OS</button>
+        </form>
+
+        <section id="comprovante" hidden>
+            <h2>OS cadastrada</h2>
+            <p id="comprovante-info"></p>
+            <img id="qrcode" src="" alt="QR Code com os dados da ordem de serviço" width="200" height="200">
+            <p>Escaneie para guardar a sua via.</p>
+        </section>
+
+        <section id="lista">
+            <h2>Ordens cadastradas</h2>
+            <ul id="lista-os"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Santino Informática — Recife/PE</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

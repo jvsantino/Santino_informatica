@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Via do cliente da ordem de serviço - Santino Informática.">
+    <title>Via do cliente | Santino Informática</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @media print {
+            #acoes { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <main id="via">
+        <header>
+            <h1>Santino Informática</h1>
+            <p>Assistência técnica — Recife/PE</p>
+        </header>
+
+        <h2 id="titulo-os">Via do cliente</h2>
+
+        <dl>
+            <dt>Cliente</dt>
+            <dd id="via-nome"></dd>
+
+            <dt>Equipamento</dt>
+            <dd id="via-dispositivo"></dd>
+
+            <dt>Data de entrada</dt>
+            <dd id="via-data"></dd>
+        </dl>
+
+        <p id="aviso">Apresente esta via na retirada do equipamento.</p>
+
+        <div id="acoes">
+            <button type="button" id="btn-pdf">Salvar em PDF</button>
+        </div>
+    </main>
+
+    <script src="via.js"></script>
+</body>
+</html>
