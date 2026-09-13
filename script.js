@@ -11,7 +11,7 @@ const qrcode = document.getElementById("qrcode");
 
 // ===== Busca do CEP na API =====
 cep.addEventListener("input", async () => {
-  
+
   cep.value = cep.value.replace(/\D/g, "");
 
   if (cep.value.length !== 8) {
@@ -27,8 +27,8 @@ cep.addEventListener("input", async () => {
     const dados = await resposta.json();
 
     if (dados.erro) {
-     cepStatus.textContent = "CEP não encontrado.";
-     cepStatus.className = "falha";
+      cepStatus.textContent = "CEP não encontrado.";
+      cepStatus.className = "falha";
       return;
     }
 
@@ -66,13 +66,108 @@ function mostrarLista() {
 
   ordens.forEach((os) => {
     const item = document.createElement("li");
+
     item.innerHTML = `
       <strong>OS ${String(os.numero).padStart(4, "0")}</strong> — ${os.nome}<br>
       ${os.dispositivo} · entrada em ${os.data.split("-").reverse().join("/")}<br>
       <em>${os.defeito}</em>
     `;
+
+    if (os.foto) {
+      const img = document.createElement("img");
+      img.src = os.foto;
+      img.alt = `Foto do equipamento da OS ${os.numero}`;
+      img.className = "foto-os";
+      item.appendChild(img);
+    }
+
     listaOS.appendChild(item);
   });
+}
+
+// ===== Câmera =====
+const video = document.getElementById("camera");
+const canvas = document.getElementById("canvas");
+const preview = document.getElementById("preview");
+const fotoStatus = document.getElementById("foto-status");
+const btnCamera = document.getElementById("btn-camera");
+const btnCapturar = document.getElementById("btn-capturar");
+const btnRefazer = document.getElementById("btn-refazer");
+
+let stream = null;
+let fotoAtual = null;
+
+btnCamera.addEventListener("click", async () => {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+    video.srcObject = stream;
+    video.hidden = false;
+    btnCamera.hidden = true;
+    btnCapturar.hidden = false;
+    fotoStatus.textContent = "";
+  } catch (erro) {
+    if (erro.name === "NotAllowedError") {
+      fotoStatus.textContent = "Permissão de câmera negada.";
+    } else if (erro.name === "NotFoundError") {
+      fotoStatus.textContent = "Nenhuma câmera encontrada neste dispositivo.";
+    } else {
+      fotoStatus.textContent = "Não foi possível acessar a câmera.";
+    }
+    fotoStatus.className = "falha";
+  }
+});
+
+btnCapturar.addEventListener("click", () => {
+  // reduz a largura para 640px, mantendo a proporção
+  const largura = 640;
+  const altura = (video.videoHeight / video.videoWidth) * largura;
+
+  canvas.width = largura;
+  canvas.height = altura;
+  canvas.getContext("2d").drawImage(video, 0, 0, largura, altura);
+
+  // converte para JPEG comprimido
+  fotoAtual = canvas.toDataURL("image/jpeg", 0.7);
+
+  preview.src = fotoAtual;
+  preview.hidden = false;
+  video.hidden = true;
+  btnCapturar.hidden = true;
+  btnRefazer.hidden = false;
+  fotoStatus.textContent = "Foto registrada.";
+  fotoStatus.className = "sucesso";
+
+  pararCamera();
+});
+
+btnRefazer.addEventListener("click", () => {
+  fotoAtual = null;
+  preview.hidden = true;
+  btnRefazer.hidden = true;
+  btnCamera.hidden = false;
+  fotoStatus.textContent = "";
+  fotoStatus.className = "";
+});
+
+function pararCamera() {
+  if (stream) {
+    stream.getTracks().forEach((faixa) => faixa.stop());
+    stream = null;
+  }
+}
+
+function limparCamera() {
+  pararCamera();
+  fotoAtual = null;
+  preview.hidden = true;
+  video.hidden = true;
+  btnCapturar.hidden = true;
+  btnRefazer.hidden = true;
+  btnCamera.hidden = false;
+  fotoStatus.textContent = "";
+  fotoStatus.className = "";
 }
 
 // Envio do formulário
@@ -91,7 +186,9 @@ formulario.addEventListener("submit", (evento) => {
     dispositivo: document.getElementById("dispositivo").value,
     data: document.getElementById("data_de_entrada").value,
     defeito: document.getElementById("defeito").value,
+    foto: fotoAtual,
   };
+
 
   const ordens = lerOS();
   ordens.unshift(os);
@@ -100,6 +197,7 @@ formulario.addEventListener("submit", (evento) => {
   gerarQRCode(os);
   mostrarLista();
   formulario.reset();
+  limparCamera();
   cepStatus.textContent = "";
 });
 

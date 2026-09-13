@@ -246,3 +246,36 @@ button:hover {
   section, form { box-shadow: none; }
   #acoes { display: none; }
 }
+#area-camera video,
+#area-camera img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  margin-bottom: 1rem;
+}
+
+#btn-camera,
+#btn-capturar,
+#btn-refazer {
+  margin-bottom: 1rem;
+}
+
+#btn-refazer {
+  background-color: var(--cinza);
+}
+
+#foto-status {
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-height: 1.5rem;
+}
+
+.foto-os {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  border-radius: var(--raio);
+  margin-top: 0.75rem;
+}
