@@ -144,7 +144,9 @@ btnCapturar.addEventListener("click", () => {
 
 btnRefazer.addEventListener("click", () => {
   fotoAtual = null;
+  preview.src = "";
   preview.hidden = true;
+  video.srcObject = null;
   btnRefazer.hidden = true;
   btnCamera.hidden = false;
   fotoStatus.textContent = "";
@@ -156,6 +158,7 @@ function pararCamera() {
     stream.getTracks().forEach((faixa) => faixa.stop());
     stream = null;
   }
+  video.srcObject = null;
 }
 
 function limparCamera() {
