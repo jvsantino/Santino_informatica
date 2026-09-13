@@ -19,3 +19,9 @@ if (!numero || !nome) {
 document.getElementById("btn-pdf").addEventListener("click", () => {
   window.print();
 });
+// ===== Registro do Service Worker =====
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js");
+  });
+}
