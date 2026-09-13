@@ -255,6 +255,10 @@ button:hover {
   border: 1px solid var(--borda);
   margin-bottom: 1rem;
 }
+#area-camera video[hidden],
+#area-camera img[hidden] {
+  display: none;
+}
 
 #btn-camera,
 #btn-capturar,

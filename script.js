@@ -144,8 +144,8 @@ btnCapturar.addEventListener("click", () => {
 
 btnRefazer.addEventListener("click", () => {
   fotoAtual = null;
-  preview.src = "";
   preview.hidden = true;
+  preview.removeAttribute("src");
   video.srcObject = null;
   btnRefazer.hidden = true;
   btnCamera.hidden = false;
