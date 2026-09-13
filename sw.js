@@ -1,4 +1,4 @@
-const CACHE = "santino-os-v1";
+const CACHE = "santino-os-v2";
 
 const ARQUIVOS = [
   "./",
